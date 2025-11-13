@@ -33,6 +33,5 @@ export async function POST(request) {
     }catch{
         return NextResponse.json({message: "ログイン失敗"})
     }
-    
 
 }
