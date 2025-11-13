@@ -7,9 +7,15 @@ export async function PUT(request, context) {
     const reqBody = await request.json()
     try{
         await connectDB()
+        const params = await context.params
         const singleItem = await ItemModel.findById(params.id)
-        await ItemModel.updateOne({_id: params.id},reqBody)
+        if(singleItem.email === reqBody.email){
+                    await ItemModel.updateOne({_id: params.id},reqBody)
         return NextResponse.json({message: "アイテム編集成功"})
+        }else{
+            return NextResponse.json({message: "ほかの人が作成したアイテムです"})
+        }
+
     }catch{
         return NextResponse.json({message: "アイテム編集失敗"})
     }

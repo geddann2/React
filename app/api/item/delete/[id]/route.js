@@ -4,9 +4,15 @@ import { ItemModel } from "@/app/utils/schemaModels"
 export async function DELETE(request,context) {
     try{
         await connectDB
-        const params = await context.params
-        await ItemModel.deleteOne({_id: params.id})
+       const params = await context.params
+        const singleItem = await ItemModel.findById(params.id)
+        if(singleItem.email === reqBody.email){
+                    await ItemModel.deleteOne({_id: params.id})
         return NextResponse.json({message: "アイテム削除成功"})
+        }else{
+            return NextResponse.json({message:"ほかの人が作成したアイテムです"})
+        }
+
     }catch{
         return NextResponse.json({message: "アイテム削除失敗"})
     }
