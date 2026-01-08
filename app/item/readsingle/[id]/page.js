@@ -11,7 +11,17 @@ const ReadSingleItem = async(context) => {
     const singleItem = await getSingleItem(params.id)
     console.log(singleItem)
     return(
-        <h1>個別アイテムページ</h1>
+        <div>
+            <div>
+            <Image src ={singleItem.image}width = {750} height={500} alt = "item-image" piority/>
+            </div>
+            <div>
+                <h1>{singleItem.title}</h1>
+                <h2>{singleItem.price}</h2>
+                <hr/>
+                <p>{singleItem.description}</p>
+            </div>
+        </div>
     )
 }
 
